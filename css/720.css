@@ -1,0 +1,30 @@
+.container{
+    max-width: 720px;
+}
+#container{
+    flex-direction: column;
+}
+
+/* Navbar */
+        .navbar-items {
+            padding: 0.25rem 0px;
+        }
+        .menu-items a{
+            display: none;
+        }
+
+/* Home */
+        /* News */
+        .news-post {
+            width: 340px;
+            margin-bottom: 15px;
+            height: 185px;
+}
+/* Aside */
+.sidebar-container {
+    width: 100%;
+}
+.games-sidebar{
+    width: 240px;
+}
+/* Footer */
