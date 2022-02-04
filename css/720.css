@@ -9,8 +9,11 @@
         .navbar-items {
             padding: 0.25rem 0px;
         }
-        .menu-items a{
+        .menu{
             display: none;
+        }
+        #site-title img{
+            display: block;
         }
 
 /* Home */

@@ -8,7 +8,10 @@
 .navbar-items {
     padding: 0.25rem 0px;
 }
-.menu-items a{
+#site-title img{
+    display: block;
+}
+.menu{
     display: none;
 }
 

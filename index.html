@@ -14,33 +14,48 @@
 </head>
 
 <body>
-    <!-- Navigation Bar -->
-    <nav id="navbar">
-        <div class="navbar-items container">
-            <div id="site-title">
-                <a href="/" id="title">Allapkstore</a>
+    <!-- Header -->
+    <header>
+        <!-- Navigation Bar -->
+        <nav id="navbar">
+            <div class="navbar-items container">
+                <div id="site-title">
+                    <img id="toggle" src="./img/utility/menu-outline.svg" alt="">
+                    <a href="/" id="title">Allapkstore</a>
+                </div>
+                <div class="menu">
+                    <ul>
+                        <li class="menu-items active"><a href="#">Home</a></li>
+                        <li class="menu-items"><a href="#">Apps</a></li>
+                        <li class="menu-items"><a href="#">Games</a></li>
+                        <li class="menu-items"><a href="#">News</a></li>
+                    </ul>
+                </div>
+                <div id="search">
+                    <input type="text" placeholder="Search">
+                    <img src="img/utility/search.png" alt="">
+                </div>
             </div>
-            <div class="menu">
-                <ul>
-                    <li class="menu-items active"><a href="#">Home</a></li>
-                    <li class="menu-items"><a href="#">Apps</a></li>
-                    <li class="menu-items"><a href="#">Games</a></li>
-                    <li class="menu-items"><a href="#">News</a></li>
-                </ul>
+        </nav>
+
+        <!-- Mobile Navigation -->
+        <div class="mobile-header">
+            <div class="toggle-box">
+                <img id="toggle1" src="./img/utility/close-outline.svg" alt="">
             </div>
-            <div id="search">
-                <input type="text" placeholder="Search">
-                <img src="img/utility/search.png" alt="">
-            </div>
+            <div class="mobile-menu"></div>
         </div>
-    </nav>
+        <div class="navegation-overlay"></div>
+    </header>
 
     <div id="container" class="container">
         <!-- Home Section -->
         <section id="home">
             <!-- News Post Section -->
             <section id="news">
-                <a href="#"><h3 class="app-category">News</h3></a>
+                <a href="#">
+                    <h3 class="app-category">News</h3>
+                </a>
                 <div class="news-box">
                     <div class="news-post" id="news-post1">
                         <div class="news-title">
@@ -63,7 +78,9 @@
 
             <!-- Editor's Choice Section -->
             <section class="editors-choice">
-                <a href="#"><h3 class="app-category">Editor's Choice</h3></a>
+                <a href="#">
+                    <h3 class="app-category">Editor's Choice</h3>
+                </a>
                 <dev class="app-row">
                     <a href="#" class="app-collum">
                         <div class="app-icon">
@@ -184,7 +201,9 @@
 
             <!-- Games Section -->
             <section class="editors-choice">
-                <a href="#"><h3 class="app-category">Games - Latest Update</h3></a>
+                <a href="#">
+                    <h3 class="app-category">Games - Latest Update</h3>
+                </a>
                 <dev class="app-row">
                     <a href="#" class="app-collum">
                         <div class="app-icon">
@@ -332,7 +351,9 @@
 
             <!-- Apps Section -->
             <section class="editors-choice">
-                <a href="#"><h3 class="app-category">Apps - Latest Update</h3></a>
+                <a href="#">
+                    <h3 class="app-category">Apps - Latest Update</h3>
+                </a>
                 <dev class="app-row">
                     <a href="#" class="app-collum">
                         <div class="app-icon">
@@ -488,7 +509,9 @@
         <aside id="side-bar">
             <!-- Apps Category Into Side Bar Section -->
             <section class="sidebar-container">
-                <a href="#"><h3 class="app-category">Games</h3></a>
+                <a href="#">
+                    <h3 class="app-category">Games</h3>
+                </a>
                 <div class="sidebar-responsive">
                     <a href="#" class="games-sidebar">
                         <div class="aside-icon">
@@ -614,7 +637,9 @@
             </section>
 
             <section class="sidebar-container">
-                <a href="#"><h3 class="app-category">Apps</h3></a>
+                <a href="#">
+                    <h3 class="app-category">Apps</h3>
+                </a>
                 <div class="sidebar-responsive">
                     <a href="#" class="games-sidebar">
                         <div class="aside-icon">
@@ -801,6 +826,7 @@
             © Copyright 2021 <a href="http://allapkstore.com">Allapkstore.com</a> Allright Reserved.
         </div>
     </footer>
+    <script src="./js/index.js"></script>
 </body>
 
 </html>
