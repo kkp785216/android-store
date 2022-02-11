@@ -25,7 +25,7 @@ navegationOverlay.onclick = function () {
 function apiKey() {
     let key;
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', '../private/apiKey.txt', false);
+    xhr.open('GET', 'https://kkp785216.github.io/project4/private/apiKey.txt', false);
     xhr.onload = function () {
         key = this.responseText;
     }
