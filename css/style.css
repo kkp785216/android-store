@@ -248,6 +248,7 @@ body{
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
+            position: relative;
         }
         .app-row a{
             text-decoration: none;
@@ -452,4 +453,22 @@ button.btn {
 button.btn:hover {
     background-color: rgba(209, 209, 209, 0.719);
 
+}
+.loadingApps {
+    min-width: 100%;
+    min-height: 100%;
+    display: flex;
+    background: #d3d3d3ad;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 3;
+    justify-content: center;
+    align-items: center;
+    border-radius: 13px;
+    margin: -8px;
+    font-size: 2rem;
+    font-weight: 600;
+    color: #6d6d6d;
 }
