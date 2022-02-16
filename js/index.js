@@ -22,17 +22,33 @@ navegationOverlay.onclick = function () {
 }
 
 // Let find api key
+
 function apiKey() {
     let key;
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', '../private/apiKey.txt', false);
+    xhr.open('GET', 'https://kkp785216.github.io/project4/private/apiKey.txt', true);
     xhr.onload = function () {
         key = this.responseText;
     }
     xhr.send();
     return key;
 }
-const key = apiKey();
+const key = '8cc04ff3720f0a2c8cc3724a09944bd05d333537';
+
+// Loading preview before loading apps
+loading = true;
+function loadingFunc() {
+    if (loading == true) {
+        let editors = document.querySelectorAll('.editors-choice .app-row');
+        Array.from(editors).forEach((element) => {
+            element.style.opacity = ".5"
+        })
+    }
+}
+loadingFunc();
+function loadingExitFunc(section) {
+    section.style.opacity = '1';
+}
 
 // Load Top Tranding Apps and Populate into the DOM
 async function topTrandingFunc() {
@@ -76,10 +92,10 @@ topTrandingResult.then((result) => {
             element['cat_keys'].forEach((element, index) => {
                 element = element.toLocaleLowerCase();
                 element = element.replace(element[0], element[0].toUpperCase());
-                if(index > 0){
+                if (index > 0) {
                     catogary += `, ${element}`;
                 }
-                else{
+                else {
                     catogary += `${element}`;
                 }
             });
@@ -87,8 +103,7 @@ topTrandingResult.then((result) => {
         }
     });
     editors.innerHTML = html;
-    console.log(result);
-    arrayResult = result;
+    loadingExitFunc(editors);
 });
 
 
@@ -134,10 +149,10 @@ latestGamesResult.then((result) => {
             element['cat_keys'].forEach((element, index) => {
                 element = element.toLocaleLowerCase();
                 element = element.replace(element[0], element[0].toUpperCase());
-                if(index > 0){
+                if (index > 0) {
                     catogary += `, ${element}`;
                 }
-                else{
+                else {
                     catogary += `${element}`;
                 }
             });
@@ -145,8 +160,7 @@ latestGamesResult.then((result) => {
         }
     });
     editors.innerHTML = html;
-    console.log(result);
-    arrayResult = result;
+    loadingExitFunc(editors);
 });
 
 
@@ -192,10 +206,10 @@ latestAppsResult.then((result) => {
             element['cat_keys'].forEach((element, index) => {
                 element = element.toLocaleLowerCase();
                 element = element.replace(element[0], element[0].toUpperCase());
-                if(index > 0){
+                if (index > 0) {
                     catogary += `, ${element}`;
                 }
-                else{
+                else {
                     catogary += `${element}`;
                 }
             });
@@ -203,6 +217,5 @@ latestAppsResult.then((result) => {
         }
     });
     editors.innerHTML = html;
-    console.log(result);
-    arrayResult = result;
+    loadingExitFunc(editors);
 });
