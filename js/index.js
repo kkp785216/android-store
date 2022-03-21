@@ -237,6 +237,6 @@ function singleApp(appId){
     let singleAppApi = document.getElementById(appId).value;
     localStorage.setItem('singleAppApi', singleAppApi);
     setTimeout(() => {
-        location.href = '/app.html';
+        location.href = 'app.html';
     }, 0);
 }
