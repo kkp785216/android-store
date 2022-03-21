@@ -206,6 +206,7 @@ body{
     grid-area: home;
     margin-right: 23px;
     margin-top: 63px;
+    width: 100%;
 }
     /* News Section */
         #news{
@@ -257,6 +258,7 @@ body{
         }
         .app-row a{
             text-decoration: none;
+            cursor: pointer;
         }
 
         .app-collum {
@@ -305,6 +307,86 @@ body{
             margin-left: 2%;
         }
 
+/* App Post */
+        .breadcrumb ul{
+            display: flex;
+            align-items: center;
+        }
+        .breadcrumb ul li{
+            display: flex;
+            align-items: center;
+            list-style: none;
+        }
+        .breadcrumb ul li img{
+            display: block;
+            width: 16px;
+            margin-left: 5px;
+        }
+        .breadcrumb ul li a{
+            color: var(--app-title-color);
+            text-decoration: none;
+            transition: .5s;
+        }
+        .breadcrumb ul li a:hover{
+            color: grey;
+        }
+        .single-app-title{
+            font-weight: 600;
+            text-align: center;
+            padding: 13px;
+        }
+        .single-app-info{
+            display: flex;
+            align-items: center;
+            margin: 13px 0;
+        }
+        .single-app-icon{
+            max-width: 32%;
+            width: 100%;
+            margin-right: 18px;
+        }
+        .single-app-icon img{
+            width: 75%;
+            display: block;
+            margin: auto;
+            border-radius: 8px;
+        }
+        .single-app-information{
+            width: 100%;
+        }
+        .single-app-information table{
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .single-app-information table tr,
+        .single-app-information table th
+        {
+            padding: 11px;
+        }
+        .single-app-information table th{
+            text-align: left;
+            font-weight: 600;
+        }
+        .single-app-information table tr:nth-child(odd){
+            background-color: rgb(242 242 242);
+        }
+        .single-download{
+            background-color: var(--app-title-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            padding: 10px;
+            border-radius: 7px;
+        }
+        .single-download img{
+            filter: invert(1);
+            margin-right: 8px;
+        }
+        .single-app-disc{
+
+        }
 
 /* Side Bar */
 #side-bar{
@@ -313,6 +395,9 @@ body{
 }
         .sidebar-container{
             width: 420px;
+        }
+        .sidebar-container:last-child{
+            margin-top: 21px;
         }
 
         .sidebar-responsive{

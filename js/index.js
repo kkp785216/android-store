@@ -33,7 +33,6 @@ function apiKey() {
     xhr.send();
     return key;
 }
-const key = '8cc04ff3720f0a2c8cc3724a09944bd05d333537';
 
 // Loading preview before loading apps
 loading = true;
@@ -50,30 +49,39 @@ function loadingExitFunc(section) {
     section.style.opacity = '1';
 }
 
-// Load Top Tranding Apps and Populate into the DOM
-async function topTrandingFunc() {
-    params = {
-        "list_name": "movers_shakers",
-        "cat_key": "OVERALL",
-        "country": "IN",
-        "limit": "10",
-        "access_token": key,
-    }
-    url = `https://data.42matters.com/api/v3.0/android/apps/top_google_charts.json?list_name=${params["list_name"]}&cat_key=${params["cat_key"]}&country=${params["country"]}&limit=${params["limit"]}&access_token=${params["access_token"]}`;
+fetchKey = fetch('apiKey.txt')
+    .then(response => response.text())
+    .then(key => {
+        loadAllApps(key);
+    });
 
-    const result = await fetch(url);
-    if (result.status === 200) {
-        return result.json();
+function loadAllApps(key) {
+    // Load Top Tranding Apps and Populate into the DOM
+    async function topTrandingFunc() {
+        params = {
+            "list_name": "movers_shakers",
+            "cat_key": "OVERALL",
+            "country": "IN",
+            "limit": "10",
+            "access_token": key,
+        }
+        // url = `https://data.42matters.com/api/v3.0/android/apps/top_google_charts.json?list_name=${params["list_name"]}&cat_key=${params["cat_key"]}&country=${params["country"]}&limit=${params["limit"]}&access_token=${params["access_token"]}`;
+        url = 'api/overall.txt';
+
+        const result = await fetch(url);
+        if (result.status === 200) {
+            return result.json();
+        }
     }
-}
-let topTrandingResult = topTrandingFunc();
-topTrandingResult.then((result) => {
-    let editors = document.querySelector('.top-app-section .app-row');
-    let html = '';
-    result = result['app_list']
-    result.forEach((element) => {
-        let catogary = first();
-        html += `<a href="${element.deep_link}" class="app-collum">
+    let topTrandingResult = topTrandingFunc();
+    topTrandingResult.then((result) => {
+        let editors = document.querySelector('.top-app-section .app-row');
+        let html = '';
+        result = result['app_list']
+        result.forEach((element, index) => {
+            let catogary = first();
+            html += `<a onclick="singleApp('topApp${index}')" class="app-collum">
+                    <textarea style="display: none;" id="topApp${index}">${JSON.stringify(element)}</textarea>
                     <div class="app-icon">
                         <img src="${element.icon}" alt="">
                     </div>
@@ -87,50 +95,111 @@ topTrandingResult.then((result) => {
                         </div>
                     </div>
                 </a>`
-        function first() {
-            let catogary = '';
-            element['cat_keys'].forEach((element, index) => {
-                element = element.toLocaleLowerCase();
-                element = element.replace(element[0], element[0].toUpperCase());
-                if (index > 0) {
-                    catogary += `, ${element}`;
-                }
-                else {
-                    catogary += `${element}`;
-                }
-            });
-            return catogary;
-        }
+            function first() {
+                let catogary = '';
+                element['cat_keys'].forEach((element, index) => {
+                    element = element.toLocaleLowerCase();
+                    element = element.replace(element[0], element[0].toUpperCase());
+                    if (index > 0) {
+                        catogary += `, ${element}`;
+                    }
+                    else {
+                        catogary += `${element}`;
+                    }
+                });
+                return catogary;
+            }
+        });
+        editors.innerHTML = html;
+        loadingExitFunc(editors);
     });
-    editors.innerHTML = html;
-    loadingExitFunc(editors);
-});
 
 
-// Load Games Latest Update and Populate into the DOM
-async function latestGamesFunc() {
-    params = {
-        "list_name": "topselling_new_free",
-        "cat_key": "GAME",
-        "country": "IN",
-        "limit": "10",
-        "access_token": key,
+    // Load Games Latest Update and Populate into the DOM
+    async function latestGamesFunc() {
+        params = {
+            "list_name": "topselling_new_free",
+            "cat_key": "GAME",
+            "country": "IN",
+            "limit": "10",
+            "access_token": key,
+        }
+        // url = `https://data.42matters.com/api/v3.0/android/apps/top_google_charts.json?list_name=${params["list_name"]}&cat_key=${params["cat_key"]}&country=${params["country"]}&limit=${params["limit"]}&access_token=${params["access_token"]}`;
+        url = 'api/game.txt';
+
+        const result = await fetch(url);
+        if (result.status === 200) {
+            return result.json();
+        }
     }
-    url = `https://data.42matters.com/api/v3.0/android/apps/top_google_charts.json?list_name=${params["list_name"]}&cat_key=${params["cat_key"]}&country=${params["country"]}&limit=${params["limit"]}&access_token=${params["access_token"]}`;
+    let latestGamesResult = latestGamesFunc();
+    latestGamesResult.then((result) => {
+        let editors = document.querySelector('.latest-game-section .app-row');
+        let html = '';
+        result = result['app_list']
+        result.forEach((element, index) => {
+            let catogary = first();
+            html += `<a onclick="singleApp('game${index}')" class="app-collum">
+                    <textarea style="display: none;" id="game${index}">${JSON.stringify(element)}</textarea>
+                    <div class="app-icon">
+                        <img src="${element.icon}" alt="">
+                    </div>
+                    <div class="apps-about">
+                        <div class="app-title">
+                            <h1>${element.title}</h1>
+                        </div>
+                        <div class="app-information">
+                            <img src="img/utility/arrow.png" alt="">
+                            <span>${element.version} + ${catogary}</span>
+                        </div>
+                    </div>
+                </a>`;
+            function first() {
+                let catogary = '';
+                element['cat_keys'].forEach((element, index) => {
+                    element = element.toLocaleLowerCase();
+                    element = element.replace(element[0], element[0].toUpperCase());
+                    if (index > 0) {
+                        catogary += `, ${element}`;
+                    }
+                    else {
+                        catogary += `${element}`;
+                    }
+                });
+                return catogary;
+            }
+        });
+        editors.innerHTML = html;
+        loadingExitFunc(editors);
+    });
 
-    const result = await fetch(url);
-    if (result.status === 200) {
-        return result.json();
+
+    // Load Apps Latest Update and Populate into the DOM
+    async function latestAppsFunc() {
+        params = {
+            "list_name": "topselling_new_free",
+            "cat_key": "APPLICATION",
+            "country": "IN",
+            "limit": "10",
+            "access_token": key,
+        }
+        // url = `https://data.42matters.com/api/v3.0/android/apps/top_google_charts.json?list_name=${params["list_name"]}&cat_key=${params["cat_key"]}&country=${params["country"]}&limit=${params["limit"]}&access_token=${params["access_token"]}`;
+        url = 'api/application.txt';
+
+        const result = await fetch(url);
+        if (result.status === 200) {
+            return result.json();
+        }
     }
-}
-let latestGamesResult = latestGamesFunc();
-latestGamesResult.then((result) => {
-    let editors = document.querySelector('.latest-game-section .app-row');
-    let html = '';
-    result = result['app_list']
-    result.forEach((element) => {
-        let catogary = first();
-        html += `<a href="${element.deep_link}" class="app-collum">
+    let latestAppsResult = latestAppsFunc();
+    latestAppsResult.then((result) => {
+        let editors = document.querySelector('.latest-app-section .app-row');
+        let html = '';
+        result = result['app_list']
+        result.forEach((element, index) => {
+            let catogary = first();
+            html += `<a onclick="singleApp('latestApp${index}')" class="app-collum">
+                    <textarea style="display: none;" id="latestApp${index}">${JSON.stringify(element)}</textarea>
                     <div class="app-icon">
                         <img src="${element.icon}" alt="">
                     </div>
@@ -144,78 +213,30 @@ latestGamesResult.then((result) => {
                         </div>
                     </div>
                 </a>`
-        function first() {
-            let catogary = '';
-            element['cat_keys'].forEach((element, index) => {
-                element = element.toLocaleLowerCase();
-                element = element.replace(element[0], element[0].toUpperCase());
-                if (index > 0) {
-                    catogary += `, ${element}`;
-                }
-                else {
-                    catogary += `${element}`;
-                }
-            });
-            return catogary;
-        }
+            function first() {
+                let catogary = '';
+                element['cat_keys'].forEach((element, index) => {
+                    element = element.toLocaleLowerCase();
+                    element = element.replace(element[0], element[0].toUpperCase());
+                    if (index > 0) {
+                        catogary += `, ${element}`;
+                    }
+                    else {
+                        catogary += `${element}`;
+                    }
+                });
+                return catogary;
+            }
+        });
+        editors.innerHTML = html;
+        loadingExitFunc(editors);
     });
-    editors.innerHTML = html;
-    loadingExitFunc(editors);
-});
-
-
-// Load Apps Latest Update and Populate into the DOM
-async function latestAppsFunc() {
-    params = {
-        "list_name": "topselling_new_free",
-        "cat_key": "APPLICATION",
-        "country": "IN",
-        "limit": "10",
-        "access_token": key,
-    }
-    url = `https://data.42matters.com/api/v3.0/android/apps/top_google_charts.json?list_name=${params["list_name"]}&cat_key=${params["cat_key"]}&country=${params["country"]}&limit=${params["limit"]}&access_token=${params["access_token"]}`;
-
-    const result = await fetch(url);
-    if (result.status === 200) {
-        return result.json();
-    }
 }
-let latestAppsResult = latestAppsFunc();
-latestAppsResult.then((result) => {
-    let editors = document.querySelector('.latest-app-section .app-row');
-    let html = '';
-    result = result['app_list']
-    result.forEach((element) => {
-        let catogary = first();
-        html += `<a href="${element.deep_link}" class="app-collum">
-                    <div class="app-icon">
-                        <img src="${element.icon}" alt="">
-                    </div>
-                    <div class="apps-about">
-                        <div class="app-title">
-                            <h1>${element.title}</h1>
-                        </div>
-                        <div class="app-information">
-                            <img src="img/utility/arrow.png" alt="">
-                            <span>${element.version} + ${catogary}</span>
-                        </div>
-                    </div>
-                </a>`
-        function first() {
-            let catogary = '';
-            element['cat_keys'].forEach((element, index) => {
-                element = element.toLocaleLowerCase();
-                element = element.replace(element[0], element[0].toUpperCase());
-                if (index > 0) {
-                    catogary += `, ${element}`;
-                }
-                else {
-                    catogary += `${element}`;
-                }
-            });
-            return catogary;
-        }
-    });
-    editors.innerHTML = html;
-    loadingExitFunc(editors);
-});
+
+function singleApp(appId){
+    let singleAppApi = document.getElementById(appId).value;
+    localStorage.setItem('singleAppApi', singleAppApi);
+    setTimeout(() => {
+        location.href = '/app.html';
+    }, 0);
+}
