@@ -80,7 +80,7 @@ function loadAllApps(key) {
         result = result['app_list']
         result.forEach((element, index) => {
             let catogary = first();
-            html += `<a onclick="singleApp('topApp${index}')" class="app-collum">
+            html += `<a onclick="singleApp('topApp${index}', 'Tranding')" class="app-collum">
                     <textarea style="display: none;" id="topApp${index}">${JSON.stringify(element)}</textarea>
                     <div class="app-icon">
                         <img src="${element.icon}" alt="">
@@ -139,7 +139,7 @@ function loadAllApps(key) {
         result = result['app_list']
         result.forEach((element, index) => {
             let catogary = first();
-            html += `<a onclick="singleApp('game${index}')" class="app-collum">
+            html += `<a onclick="singleApp('game${index}', 'Games')" class="app-collum">
                     <textarea style="display: none;" id="game${index}">${JSON.stringify(element)}</textarea>
                     <div class="app-icon">
                         <img src="${element.icon}" alt="">
@@ -198,7 +198,7 @@ function loadAllApps(key) {
         result = result['app_list']
         result.forEach((element, index) => {
             let catogary = first();
-            html += `<a onclick="singleApp('latestApp${index}')" class="app-collum">
+            html += `<a onclick="singleApp('latestApp${index}', 'Apps')" class="app-collum">
                     <textarea style="display: none;" id="latestApp${index}">${JSON.stringify(element)}</textarea>
                     <div class="app-icon">
                         <img src="${element.icon}" alt="">
@@ -233,10 +233,11 @@ function loadAllApps(key) {
     });
 }
 
-function singleApp(appId){
+function singleApp(appId, category){
     let singleAppApi = document.getElementById(appId).value;
     localStorage.setItem('singleAppApi', singleAppApi);
+    localStorage.setItem('app-category', category);
     setTimeout(() => {
-        location.href = 'app.html';
+        location.href = `app.html?${JSON.parse(singleAppApi).package_name}`;
     }, 0);
 }
