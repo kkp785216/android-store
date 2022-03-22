@@ -10,7 +10,7 @@ body{
 }
 
 :root{
-    --primary-color: blue;
+    --primary-color: #0072ff;
     --secondary-color: rgb(33, 37, 41);
     --third-color: rgb(108, 117, 125);
     --background-color: white;
@@ -19,7 +19,7 @@ body{
     --button-color: rgb(33, 37, 41);
     --news-color: white;
 
-    --app-title-color: rgb(76 76 255);
+    --app-title-color: #2f2f91;
     --bold-font: 600;
 }
 
@@ -277,6 +277,7 @@ body{
 
         .app-icon {
             width: 65px;
+            min-width: 65px;
         }
         
         .app-icon img {
@@ -347,7 +348,7 @@ body{
             margin-right: 18px;
         }
         .single-app-icon img{
-            width: 75%;
+            width: 200px;
             display: block;
             margin: auto;
             border-radius: 8px;
@@ -372,7 +373,7 @@ body{
             background-color: rgb(242 242 242);
         }
         .single-download{
-            background-color: var(--app-title-color);
+            background-color: var(--primary-color);
             color: white;
             display: flex;
             align-items: center;
@@ -476,6 +477,7 @@ body{
         }
         .aside-icon{
             width: 33px;
+            min-width: 33px;
         }
         .aside-icon img{
             width: 100%;
@@ -588,15 +590,17 @@ button.btn {
     box-sizing: border-box;
     border: none;
     margin: 12px 0px;
+    margin-bottom: 23px;
     border-radius: 8px;
-    padding: 12px;
+    padding: 10px;
     cursor: pointer;
     transition-duration: 200ms;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    background-color: rgb(240 242 245);
+    font-family: "Segoe UI", sans-serif;
     font-weight: 600;
 }
 button.btn:hover {
-    background-color: rgba(209, 209, 209, 0.719);
+    background-color: rgb(226 230 234);
 
 }
 .loadingApps {
@@ -616,4 +620,222 @@ button.btn:hover {
     font-size: 2rem;
     font-weight: 600;
     color: #6d6d6d;
+}
+
+
+/* Responsive CSS */
+@media(max-width: 1200px){
+    .container{
+        max-width: 960px;
+    }
+    
+    /* Navbar */
+    .menu li {
+        margin: 0px 0px;
+    }
+    /* Home */
+            /* News Section */
+            .news-post{
+                line-height: .9;
+                width: 197px;
+                height: 112px;
+            }
+    /* Aside */
+            .sidebar-container {
+                width: 286px;
+            }
+            .games-sidebar {
+                width: 80px;
+            }
+    /* Footer */
+}
+
+@media (max-width: 991px){
+    .container{
+        max-width: 720px;
+    }
+    #container{
+        flex-direction: column;
+    }
+    
+    /* Navbar */
+            .navbar-items {
+                padding: 0.25rem 0px;
+            }
+            .menu{
+                display: none;
+            }
+            #site-title img{
+                display: block;
+            }
+    
+    /* Home */
+            /* News */
+            .news-post {
+                width: 340px;
+                margin-bottom: 15px;
+                height: 185px;
+    }
+    /* Aside */
+    .sidebar-container {
+        width: 100%;
+    }
+    .sidebar-container:first-child{
+        margin-top: 21px;
+    }
+    .games-sidebar{
+        width: 240px;
+    }
+    /* Footer */
+}
+
+@media (max-width: 767px){
+    .container{
+        max-width: 540px;
+    }
+    #container {
+        flex-direction: column;
+    }
+    /* Navbar */
+    .navbar-items {
+        padding: 0.25rem 0px;
+    }
+    #site-title img{
+        display: block;
+    }
+    .menu{
+        display: none;
+    }
+    
+    /* Home */
+    .app-row {
+        flex-direction: column;
+    }
+    .app-collum {
+        width: 100%;
+    }
+    
+    /* News */
+    .news-post {
+        width: 251px;
+        margin-bottom: 17px;
+        height: 144px;
+    }
+    /* Single App */
+    .single-app-info{
+        flex-wrap: wrap;
+    }
+    .single-app-icon {
+        max-width: 300px;
+        margin: 0px auto;
+        margin-bottom: 23px;
+        width: 100%;
+    }
+    /* Aside */
+    .sidebar-container {
+    width: 100%;
+    }
+    .games-sidebar{
+        width: 170px;
+    }
+    /* Footer */
+}
+
+@media (max-width: 575px){
+    .container{
+        max-width: 575px;
+        padding: 0px;
+        margin: 10px;
+    }
+    #container {
+        flex-direction: column;
+    }
+    /* Navbar */
+    #title{
+        font-size: 1.5rem;
+        margin-right: 20px;
+    }
+    .navbar-items {
+        padding: 0.25rem 0px;
+    }
+    #site-title img{
+        display: block;
+    }
+    .menu{
+        display: none;
+    }
+    
+    /* Home */
+    .app-row {
+        flex-direction: column;
+    }
+    .app-collum {
+        width: 100%;
+    }
+    
+    /* News */
+    .news-post {
+        width: 100%;
+        margin-bottom: 15px;
+        height: 185px;
+    }
+    
+    /* Aside */
+    .sidebar-container {
+    width: 100%;
+    }
+    .games-sidebar{
+    width: 170px;
+    }
+    
+    /* Footer */
+    #footer-menu-container {
+        flex-direction: column;
+    }
+    .footer-menu {
+        width: 100%;
+    }
+}
+
+@media (min-width: 410px) and (max-width: 575px) {
+    .news-post {
+        height: 265px;
+    } 
+}
+
+@media screen and (max-width: 394px) {
+    .sidebar-responsive {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    .games-sidebar {
+        width: 100%;
+        overflow: hidden;
+    }
+}
+
+@media (max-width: 330px){
+    #search{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .app-collum {
+        flex-direction: column;
+    }
+    .app-icon{
+        margin: auto;
+    }
+    .app-icon img{
+        display: block;
+        margin: auto;
+    }
+    .apps-about {
+        margin-left: 0%;
+        margin-top: 4%;
+    }
+    .app-title h1{
+        text-align: center;
+    }
 }

@@ -22,18 +22,79 @@ navegationOverlay.onclick = function () {
 }
 
 
-if(localStorage.getItem('singleAppApi') !== null){
+if (localStorage.getItem('singleAppApi') !== null) {
     api = JSON.parse(localStorage.getItem('singleAppApi'));
 
     // Utility
-    let size = parseInt(api.size/1048576) <=1024 ? parseInt(api.size/1048576)+'M' : (api.size/1073741824).toFixed(1)+'G'
+    let size = parseInt(api.size / 1048576) <= 1024 ? parseInt(api.size / 1048576) + 'M' : (api.size / 1073741824).toFixed(1) + 'G'
 
     // Breadcrumb
     let breadcrumb = document.createElement('div');
-    breadcrumb.innerHTML = `${localStorage.getItem('app-category') !== null? `<li><a href="#">${localStorage.getItem('app-category')}</a><img src="./img/utility/chevron-forward-outline.svg" alt="">
-    </li>`:''}<li><a>${api.title}</a></li>`;
-    document.querySelector('.breadcrumb ul').append(breadcrumb.firstElementChild);
-    document.querySelector('.breadcrumb ul').append(breadcrumb.firstElementChild);
+    let categoryName = {
+        OVERALL: 'Tranding',
+        APPLICATION: 'Apps',
+        GAME: 'Games',
+
+        ART_AND_DESIGN: 'Art & Design',
+        AUTO_AND_VEHICLES: 'Auto & Vehicles',
+        BEAUTY: 'Beauty',
+        BOOKS_AND_REFERENCE: 'Books & Reference',
+        BUSINESS: 'Business',
+        COMICS: 'Comics',
+        COMMUNICATION: 'Communication',
+        DATING: 'Dating',
+        EDUCATION: 'Education',
+        ENTERTAINMENT: 'Entertainment',
+        EVENTS: 'Events',
+        FINANCE: 'Finance',
+        FOOD_AND_DRINK: 'Food & Drink',
+        HEALTH_AND_FITNESS: 'Health & Fitness',
+        HOUSE_AND_HOME: 'House & Home',
+        LIFESTYLE: 'Lifestyle',
+        MAPS_AND_NAVIGATION: 'Maps & Navigation',
+        MEDICAL: 'Medical',
+        MUSIC_AND_AUDIO: 'Music & Audio',
+        NEWS_AND_MAGAZINES: 'News & Magazines',
+        PARENTING: 'Parenting',
+        PERSONALIZATION: 'Personalization',
+        PHOTOGRAPHY: 'Photography',
+        PRODUCTIVITY: 'Productivity',
+        SHOPPING: 'Shopping',
+        SOCIAL: 'Social',
+        SPORTS: 'Sports',
+        TOOLS: 'Tools',
+        TRAVEL_AND_LOCAL: 'Travel & Local',
+        VIDEO_PLAYERS: 'Video Players & Editors',
+        WEATHER: 'Weather',
+        LIBRARIES_AND_DEMO: 'Libraries & Demo',
+
+        GAME_ARCADE: 'Arcade',
+        GAME_PUZZLE: 'Puzzle',
+        GAME_CARD: 'Cards',
+        GAME_CASUAL: 'Casual',
+        GAME_RACING: 'Racing',
+        GAME_SPORTS: 'Sport Games',
+        GAME_ACTION: 'Action',
+        GAME_ADVENTURE: 'Adventure',
+        GAME_BOARD: 'Board',
+        GAME_CASINO: 'Casino',
+        GAME_EDUCATIONAL: 'Educational',
+        GAME_MUSIC: 'Music Games',
+        GAME_ROLE_PLAYING: 'Role Playing',
+        GAME_SIMULATION: 'Simulation',
+        GAME_STRATEGY: 'Strategy',
+        GAME_TRIVIA: 'Trivia',
+        GAME_WORD: 'Word Games',
+        ANDROID_WEAR: 'Android Wear',
+    }
+    api.cat_keys.reverse().forEach((element)=>{
+        breadcrumb.innerHTML += `<li><a href="getmore.js?${element.toLowerCase()}" class="more-app-btn" category="${element}">${categoryName[element]}</a><img src="./img/utility/chevron-forward-outline.svg" alt=""></li>`
+    });
+    breadcrumb.innerHTML += `<li><a>${api.title}</a></li>`;
+    Array.from(breadcrumb.children).forEach((element)=>{
+        document.querySelector('.breadcrumb ul').append(element);
+    });
+
 
     // App Title
     document.querySelector('.single-app-title').textContent = `${api.title} v${api.version} Latest Version Downlaod`;
@@ -50,20 +111,20 @@ if(localStorage.getItem('singleAppApi') !== null){
         market_update: 'Last Updated',
         contains_ads: 'Contains Ads'
     }
-    for(let key in check){
-        if(key === 'deep_link'){
+    for (let key in check) {
+        if (key === 'deep_link') {
             hello += `<tr>
                         <th>${check[key]}</th>
                         <td><a href="${api[key]}"><img src="./img/utility/google-play.png" alt="" style="width: 80px; display: block;"></a></td>
                     </tr>`
         }
-        else if (key === 'size'){
+        else if (key === 'size') {
             hello += `<tr>
                         <th>${check[key]}</th>
                         <td>${size}</td>
                     </tr>`
         }
-        else if (key === 'market_update'){
+        else if (key === 'market_update') {
             function showTime() {
                 time = new Date(api[key]);
                 let date = time.getDate();
@@ -90,13 +151,13 @@ if(localStorage.getItem('singleAppApi') !== null){
                         <td>${showTime()}</td>
                     </tr>`
         }
-        else if(key === 'contains_ads'){
+        else if (key === 'contains_ads') {
             hello += `<tr>
                         <th>${check[key]}</th>
-                        <td>${api[key] === true? 'Yes':'No'}</td>
+                        <td>${api[key] === true ? 'Yes' : 'No'}</td>
                     </tr>`
         }
-        else{
+        else {
             hello += `<tr>
                         <th>${check[key]}</th>
                         <td>${api[key]}</td>
@@ -111,7 +172,7 @@ if(localStorage.getItem('singleAppApi') !== null){
 
     // Download Link
     let download = document.querySelectorAll('.single-download');
-    download.forEach((element)=>{
+    download.forEach((element) => {
         element.setAttribute('href', `download.html?${api.package_name}`);
         element.querySelector('span').innerText += ` (${size})`;
     });
@@ -122,11 +183,20 @@ if(localStorage.getItem('singleAppApi') !== null){
 
     // Screenshots
     let screenshots = '';
-    api.screenshots.forEach((element)=>{
+    api.screenshots.forEach((element) => {
         screenshots += `<img src="${element}">`
     })
     document.querySelector('.app-screenshot').innerHTML += screenshots;
 }
-else{
+else {
     console.log("you can't visit this page directly");
 }
+
+// Get more btn set
+document.querySelectorAll('.more-app-btn').forEach((element) => {
+    let myUrl = element.getAttribute('category');
+    element.setAttribute('href', `getmore.html?${myUrl !== null ? myUrl.toLowerCase() : ''}`);
+    element.addEventListener('click', () => {
+        localStorage.setItem('main-category', element.getAttribute('category'));
+    })
+});

@@ -55,10 +55,10 @@ if (localStorage.getItem('singleAppApi') !== null) {
             setTimeout(() => {
                 document.querySelector('.download-timer').innerHTML = '';
                 download.style.display = 'flex';
-            }, 1000);
+            }, 1500);
         }
         updateTimer();
-    }, 1000);
+    }, 1500);
 
 
     download.setAttribute('href', api.deep_link);
@@ -67,3 +67,12 @@ if (localStorage.getItem('singleAppApi') !== null) {
 else {
     console.log("you can't visit this page directly");
 }
+
+// Get more btn set
+document.querySelectorAll('.more-app-btn').forEach((element)=>{
+    let myUrl = element.getAttribute('category');
+    element.setAttribute('href', `getmore.html?${myUrl !==null ? myUrl.toLowerCase(): ''}`);
+    element.addEventListener('click', ()=>{
+        localStorage.setItem('main-category', element.getAttribute('category'));
+    })
+});
