@@ -106,13 +106,26 @@ if(localStorage.getItem('singleAppApi') !== null){
     document.getElementById('app-info-data').innerHTML = hello;
     document.querySelector('.single-app-icon img').setAttribute('src', api['icon']);
 
-    // Download Link
-    let download = document.querySelectorAll('.single-download span');
-    download.forEach((element)=>{
-        element.innerText += ` (${size})`;
-        element.setAttribute('href', api.deep_link);
-    });
+    // What's New
+    document.querySelector('.whats-new').innerText = api.what_is_new;
 
+    // Download Link
+    let download = document.querySelectorAll('.single-download');
+    download.forEach((element)=>{
+        element.setAttribute('href', `download.html?${api.package_name}`);
+        element.querySelector('span').innerText += ` (${size})`;
+    });
+    document.querySelector('.bottom-download-title').innerText = 'Download ' + api.title;
+
+    // Description
+    document.querySelector('.single-app-disc').innerText = api.description;
+
+    // Screenshots
+    let screenshots = '';
+    api.screenshots.forEach((element)=>{
+        screenshots += `<img src="${element}">`
+    })
+    document.querySelector('.app-screenshot').innerHTML += screenshots;
 }
 else{
     console.log("you can't visit this page directly");

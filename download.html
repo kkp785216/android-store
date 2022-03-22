@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" media="screen and (max-width: 575px)" href="css/phone.css"> -->
+    <link rel="stylesheet" media="(min-width: 576px) and (max-width: 767px)" href="css/540.css">
+    <link rel="stylesheet" media="(min-width: 768px) and (max-width: 991px)" href="css/720.css">
+    <link rel="stylesheet" media="(min-width: 992px) and (max-width: 1199px)" href="css/960.css">
+    <style>
+        .app-post {
+            width: 100%;
+            max-width: 850px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .download-timer{
+            margin-bottom: 5px;
+        }
+        .single-download{
+            margin: 23px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <!-- Navigation Bar -->
+        <nav id="navbar">
+            <div class="navbar-items container">
+                <div id="site-title">
+                    <img id="toggle" src="./img/utility/menu-outline.svg" alt="">
+                    <a href="/" id="title">Allapkstore</a>
+                </div>
+                <div class="menu">
+                    <ul>
+                        <li class="menu-items active"><a href="#">Home</a></li>
+                        <li class="menu-items"><a href="#">Apps</a></li>
+                        <li class="menu-items"><a href="#">Games</a></li>
+                        <li class="menu-items"><a href="#">News</a></li>
+                    </ul>
+                </div>
+                <div id="search">
+                    <input type="text" placeholder="Search">
+                    <img src="img/utility/search.png" alt="">
+                </div>
+            </div>
+        </nav>
+
+        <!-- Mobile Navigation -->
+        <div class="mobile-header">
+            <div class="toggle-box">
+                <img id="toggle1" src="./img/utility/close-outline.svg" alt="">
+            </div>
+            <div class="mobile-menu"></div>
+        </div>
+        <div class="navegation-overlay"></div>
+    </header>
+
+    <div id="container" class="container">
+        <!-- Home Section -->
+        <section id="home">
+            <div class="breadcrumb">
+                <ul>
+                    <li><a href="index.html">Home</a><img src="./img/utility/chevron-forward-outline.svg" alt="">
+                    </li>
+                </ul>
+            </div>
+            <div class="app-post">
+                <h3 class="single-app-title"></h3>
+                <div class="download-timer"></div>
+                <div class="app-screenshot"></div>
+                <a class="single-download" target="blank" style="display: none;">
+                    <img src="./img/utility/kisspng-font-awesome-computer-icons-download-computer-soft-hard-work-icon-5b5ebc20829245.0131166615329352005348.png"
+                        width="15px" alt="">
+                    <span>Download</span>
+                </a>
+                <div class="download-notes">
+                    You are now ready to download Subway Surfers for free. Here are some notes:
+                    <ul style="padding: revert;">
+                        <li>To see CPU or GPU your device uses, check with the <span style="color: blue;">CPU-Z</span>
+                            app
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- About Section -->
+    <footer id="footer">
+        <div class="container">
+            <div id="footer-menu-container">
+                <div class="footer-menu">
+                    <div class="footer-heading">
+                        <img src="img/utility/attachment-svgrepo-com.svg" alt="">
+                        <h3>Useful Section</h3>
+                    </div>
+                    <div class="footer-menu-responsive">
+                        <a href="#">Advertisement</a>
+                    </div>
+                </div>
+                <div class="footer-menu">
+                    <div class="footer-heading">
+                        <img src="img/utility/3162614_info_information_about_help_support_icon.svg" alt="">
+                        <h3>About</h3>
+                    </div>
+                    <div class="footer-menu-responsive">
+                        <a href="#">DMCA Disclaimer</a>
+                        <a href="#">Contact Us</a>
+                    </div>
+                </div>
+            </div>
+            <div id="social">
+                <a href="https://facebook.com" class="social-image" target="blank">
+                    <img src="./img/social/facebook_facebook logo_icon.svg" alt="">
+                </a>
+                <a href="https://twitter.com" class="social-image" target="blank">
+                    <img src="./img/social/twitter_social media_social network_tweet_twitter_icon.svg" alt="">
+                </a>
+                <a href="https://youtube.com" class="social-image" target="blank">
+                    <img src="./img/social/play_video_youtube_youtube logo_icon.svg" alt="">
+                </a>
+                <a href="https://pinterest.com" class="social-image" target="blank">
+                    <img src="./img/social/pinterest_icon.svg" alt="">
+                </a>
+                <a href="https://linkdin.com" class="social-image" target="blank">
+                    <img src="./img/social/in_linked_media_online_social_icon.svg" alt="">
+                </a>
+            </div>
+        </div>
+        <div id="copyright">
+            © Copyright 2021 <a href="http://allapkstore.com">Allapkstore.com</a> Allright Reserved.
+        </div>
+    </footer>
+    <script src="js/download.js"></script>
+</body>
+
+</html>

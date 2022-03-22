@@ -3,6 +3,7 @@
     margin: 0px;
     padding: 0px;
 }
+
 body{
     background-color: var(--background-color);
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -275,13 +276,13 @@ body{
         }
 
         .app-icon {
-            display: flex;
-            flex-direction: column;
+            width: 65px;
         }
         
         .app-icon img {
-            width: 65px;
             border-radius: 0.6rem;
+            width: 100%;
+            display: block;
         }
 
         .app-title h1{
@@ -386,7 +387,57 @@ body{
             margin-right: 8px;
         }
         .single-app-disc{
-
+            margin-top: 23px;
+        }
+        .desc-title{
+            font-weight: 600;
+            padding-top: 13px;
+        }
+        .app-screenshot{
+            display: flex;
+            overflow: hidden;
+            width: 100%;
+            border: 5px solid #ededed;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+        /* Scrollbar Style */
+        /* width */
+        .app-screenshot::-webkit-scrollbar{
+            width: 9px;
+            height: 9px;
+        }
+        /* Track */
+        .app-screenshot::-webkit-scrollbar-track {
+            background: #cfcfcf;
+            border-radius: 6px;
+        }
+        /* Handle */
+        .app-screenshot::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 6px;
+        }
+        /* Handle on hover */
+        .app-screenshot::-webkit-scrollbar-thumb:hover {
+            background: #555; 
+        }
+        .app-screenshot img {
+            display: block;
+            height: 188px;
+            max-width: 100%;
+            margin-right: 2px;
+            border-bottom: 2px solid #f1f1f1;
+        }
+        .app-screenshot img:last-child {
+            margin-right: 0;
+        }
+        .download-notes{
+            margin-top: 17px;
+            font-size: small;
+            font-style: italic;
+        }
+        .download-notes ul{
+            margin-top: 7px;
         }
 
 /* Side Bar */
@@ -424,10 +475,12 @@ body{
             background-color: rgb(236, 236, 236);
         }
         .aside-icon{
+            width: 33px;
         }
         .aside-icon img{
-            width: 33px;
-            border-radius: 45rem;
+            width: 100%;
+            border-radius: 50%;
+            display: block;
         }
         .category-name span{
             padding: 0px 12px;
@@ -438,6 +491,7 @@ body{
 /* Footer */
 #footer{
     grid-area: footer;
+    margin-top: 23px;
 }
         #footer-menu-container{
             display: flex;
