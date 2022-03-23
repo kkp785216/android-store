@@ -21,10 +21,77 @@ navegationOverlay.onclick = function () {
     navegationOverlay.classList.toggle('active');
 }
 
+// how much post I want to show per page
+let perPagePost = 10;
+let pageIndex = 1;
+let totalPage;
+let result;
 
 
 if (localStorage.getItem('main-category') !== null) {
+    async function topTrandingFunc() {
+        params = {
+            "list_name": "movers_shakers",
+            "cat_key": "OVERALL",
+            "country": "IN",
+            "limit": "10",
+            // "access_token": key,
+        }
+        // url = `https://data.42matters.com/api/v3.0/android/apps/top_google_charts.json?list_name=${params["list_name"]}&cat_key=${params["cat_key"]}&country=${params["country"]}&limit=${params["limit"]}&access_token=${params["access_token"]}`;
+        url = `catApi/${localStorage.getItem('main-category')}.txt`;
 
+        const result = await fetch(url);
+        if (result.status === 200) {
+            return result.json();
+        }
+    }
+    let topTrandingResult = topTrandingFunc();
+    topTrandingResult.then((data) => {
+        result = data['app_list'];
+        displayPosts();
+
+        // Page Navigation
+        function goToPage(index) {
+            displayPosts();
+            document.getElementById('number').innerHTML = `${index} of ${totalPage}`;
+            if (index < totalPage) {
+                document.getElementById('next').disabled = false;
+            }
+            else {
+                document.getElementById('next').disabled = true;
+            }
+            if (index > 1) {
+                document.getElementById('previous').disabled = false;
+            }
+            else {
+                document.getElementById('previous').disabled = true;
+            }
+        }
+        goToPage(pageIndex);
+
+        Array.from(document.getElementsByClassName('pageBtn')).forEach((element) => {
+            element.addEventListener('click', (event) => {
+                if (event.target.textContent === 'Next') {
+                    if (pageIndex < totalPage) {
+                        pageIndex++;
+                        goToPage(pageIndex);
+                    }
+                }
+                else if (event.target.textContent === 'Previous') {
+                    if (pageIndex > 1) {
+                        pageIndex--;
+                        goToPage(pageIndex);
+                    }
+                }
+            });
+        });
+    });
+}
+else {
+
+}
+
+function displayPosts() {
     let categoryName = {
         OVERALL: 'Tranding',
         APPLICATION: 'Apps',
@@ -82,32 +149,34 @@ if (localStorage.getItem('main-category') !== null) {
         GAME_WORD: 'Word Games',
         ANDROID_WEAR: 'Android Wear',
     }
+    let editors = document.querySelector('.top-app-section .app-row');
+    document.querySelector('.app-category').innerText = categoryName[localStorage.getItem('main-category')];
+    let html = '';
 
-    async function topTrandingFunc() {
-        params = {
-            "list_name": "movers_shakers",
-            "cat_key": "OVERALL",
-            "country": "IN",
-            "limit": "10",
-            // "access_token": key,
+    let wantedResult = [];
+    totalPage = ~~(result.length / perPagePost) + 1;
+    if (pageIndex <= totalPage && pageIndex > 0) {
+        if (pageIndex === 1) {
+            for (i = 0; i < perPagePost; i++) {
+                wantedResult.push(result[i]);
+            }
         }
-        // url = `https://data.42matters.com/api/v3.0/android/apps/top_google_charts.json?list_name=${params["list_name"]}&cat_key=${params["cat_key"]}&country=${params["country"]}&limit=${params["limit"]}&access_token=${params["access_token"]}`;
-        url = `catApi/${localStorage.getItem('main-category')}.txt`;
-
-        const result = await fetch(url);
-        if (result.status === 200) {
-            return result.json();
+        else if (pageIndex === totalPage) {
+            for (i = (pageIndex - 1) * perPagePost; i < ((pageIndex - 1) * perPagePost) + result.length % perPagePost; i++) {
+                wantedResult.push(result[i]);
+            }
+        }
+        else {
+            for (i = (pageIndex - 1) * perPagePost; i < (perPagePost * pageIndex); i++) {
+                wantedResult.push(result[i]);
+            }
         }
     }
-    let topTrandingResult = topTrandingFunc();
-    topTrandingResult.then((result) => {
-        let editors = document.querySelector('.top-app-section .app-row');
-        document.querySelector('.app-category').innerText = categoryName[localStorage.getItem('main-category')];
-        let html = '';
-        result = result['app_list']
-        result.forEach((element, index) => {
-            let catogary = first();
-            html += `<a href="app.html?${element.package_name}" onclick="singleApp('topApp${index}', 'Tranding')" class="app-collum">
+
+    wantedResult.forEach((element, index) => {
+        // wantedResult.forEach((element, index) => {
+        let catogary = first();
+        html += `<a href="app.html?${element.package_name}" onclick="singleApp('topApp${index}', 'Tranding')" class="app-collum">
                 <textarea style="display: none;" id="topApp${index}">${JSON.stringify(element)}</textarea>
                 <div class="app-icon">
                     <img src="${element.icon}" alt="">
@@ -122,30 +191,25 @@ if (localStorage.getItem('main-category') !== null) {
                     </div>
                 </div>
             </a>`
-            function first() {
-                let catogary = '';
-                element['cat_keys'].forEach((element, index) => {
-                    element = element.toLocaleLowerCase();
-                    element = element.replace(element[0], element[0].toUpperCase());
-                    if (index > 0) {
-                        catogary += `, ${element}`;
-                    }
-                    else {
-                        catogary += `${element}`;
-                    }
-                });
-                return catogary;
-            }
-        });
-        editors.innerHTML = html;
+        function first() {
+            let catogary = '';
+            element['cat_keys'].forEach((element, index) => {
+                element = element.toLocaleLowerCase();
+                element = element.replace(element[0], element[0].toUpperCase());
+                if (index > 0) {
+                    catogary += `, ${element}`;
+                }
+                else {
+                    catogary += `${element}`;
+                }
+            });
+            return catogary;
+        }
     });
-}
-else {
-
+    editors.innerHTML = html;
 }
 
-
-function singleApp(appId, category){
+function singleApp(appId, category) {
     let singleAppApi = document.getElementById(appId).value;
     localStorage.setItem('singleAppApi', singleAppApi);
     localStorage.setItem('app-category', category);
@@ -153,10 +217,10 @@ function singleApp(appId, category){
 
 
 // Get more btn set
-document.querySelectorAll('.more-app-btn').forEach((element)=>{
+document.querySelectorAll('.more-app-btn').forEach((element) => {
     let myUrl = element.getAttribute('category');
-    element.setAttribute('href', `getmore.html?${myUrl !==null ? myUrl.toLowerCase(): ''}`);
-    element.addEventListener('click', ()=>{
+    element.setAttribute('href', `getmore.html?${myUrl !== null ? myUrl.toLowerCase() : ''}`);
+    element.addEventListener('click', () => {
         localStorage.setItem('main-category', element.getAttribute('category'));
     })
 });
