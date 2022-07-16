@@ -34,11 +34,9 @@ navegationOverlay.onclick = function () {
     navegationOverlay.classList.toggle('active');
 }
 
-{
-    // Load Top Tranding Apps and Populate into the DOM
-    let editors = document.querySelector('.top-app-section .app-row');
+const fetchPosts = (domElm, postCategory) => {
     let html = '';
-    let result = overall['app_list']
+    let result = postCategory['app_list']
     result.forEach((element, index) => {
         let catogary = first();
         html += `<a href="app.html?${element.package_name}" onclick="singleApp('topApp${index}', 'Tranding')" class="app-collum">
@@ -71,97 +69,13 @@ navegationOverlay.onclick = function () {
             return catogary;
         }
     });
-    editors.innerHTML = html;
+    domElm.innerHTML = html;
 }
 
-
-// Load Games Latest Update and Populate into the DOM
-{
-    let editors = document.querySelector('.latest-game-section .app-row');
-    let html = '';
-    let result = game['app_list']
-    result.forEach((element, index) => {
-        let catogary = first();
-        html += `<a href="app.html?${element.package_name}" onclick="singleApp('game${index}', 'Games')" class="app-collum">
-                    <textarea style="display: none;" id="game${index}">${JSON.stringify(element)}</textarea>
-                    <div class="app-icon">
-                        <img src="${element.icon}" alt="">
-                    </div>
-                    <div class="apps-about">
-                        <div class="app-title">
-                            <h1>${element.title}</h1>
-                        </div>
-                        <div class="app-information">
-                            <img src="img/utility/arrow.png" alt="">
-                            <span>${element.version} + ${catogary}</span>
-                        </div>
-                    </div>
-                </a>`;
-        function first() {
-            let catogary = '';
-            element['cat_keys'].forEach((element, index) => {
-                element = element.toLocaleLowerCase();
-                element = element.replace(element[0], element[0].toUpperCase());
-                if (index > 0) {
-                    catogary += `, ${element}`;
-                }
-                else {
-                    catogary += `${element}`;
-                }
-            });
-            return catogary;
-        }
-    });
-    editors.innerHTML = html;
-}
-
-// Application
-{
-    let editors = document.querySelector('.latest-app-section .app-row');
-    let html = '';
-    let result = application['app_list']
-    result.forEach((element, index) => {
-        let catogary = first();
-        html += `<a href="app.html?${element.package_name}" onclick="singleApp('latestApp${index}', 'Apps')" class="app-collum">
-                        <textarea style="display: none;" id="latestApp${index}">${JSON.stringify(element)}</textarea>
-                        <div class="app-icon">
-                            <img src="${element.icon}" alt="">
-                        </div>
-                        <div class="apps-about">
-                            <div class="app-title">
-                                <h1>${element.title}</h1>
-                            </div>
-                            <div class="app-information">
-                                <img src="img/utility/arrow.png" alt="">
-                                <span>${element.version} + ${catogary}</span>
-                            </div>
-                        </div>
-                    </a>`
-        function first() {
-            let catogary = '';
-            element['cat_keys'].forEach((element, index) => {
-                element = element.toLocaleLowerCase();
-                element = element.replace(element[0], element[0].toUpperCase());
-                if (index > 0) {
-                    catogary += `, ${element}`;
-                }
-                else {
-                    catogary += `${element}`;
-                }
-            });
-            return catogary;
-        }
-    });
-    editors.innerHTML = html;
-}
-
-// Open particular app page
-function singleApp(appId, category) {
-    let singleAppApi = document.getElementById(appId).value;
-    localStorage.setItem('singleAppApi', singleAppApi);
-    localStorage.setItem('app-category', category);
-    console.log('this is krishna')
-}
+// set apps and games their sections
+fetchPosts(document.querySelector('.top-app-section .app-row'), overall);
+fetchPosts(document.querySelector('.latest-game-section .app-row'), game);
+fetchPosts(document.querySelector('.latest-app-section .app-row'), application);
 
 // Get more btn set
 document.querySelectorAll('.more-app-btn').forEach((element) => {
@@ -169,5 +83,5 @@ document.querySelectorAll('.more-app-btn').forEach((element) => {
     element.setAttribute('href', `getmore.html?${myUrl !== null ? myUrl.toLowerCase() : ''}`);
     element.addEventListener('click', () => {
         localStorage.setItem('main-category', element.getAttribute('category'));
-    })
+    });
 });
