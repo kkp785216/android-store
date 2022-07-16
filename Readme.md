@@ -4,7 +4,7 @@
 
 ### Made a Android App Store only using Html, CSS and JavaScript and this is fully dynamic with multipages
 
-<img src="https://i.imgur.com/x9f9nWq.png" />
+<img src="https://i.imgur.com/FIRlN8X.png" />
 
 ### Things used in this Project
 <p>1). Html</p>
