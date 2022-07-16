@@ -1,4 +1,4 @@
-import header from './partials/_header.js'
+import header from 'js/partials/_header.js'
 document.querySelector('header').innerHTML = header;
 
 import footer from './partials/_footer.js'
