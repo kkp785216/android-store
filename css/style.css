@@ -825,6 +825,7 @@ button.btn:hover {
 
     #side-bar{
         width: 100%;
+        padding-left: 0;
     }
 
     /* Footer */
