@@ -218,13 +218,6 @@ function displayPosts() {
     editors.innerHTML = html;
 }
 
-function singleApp(appId, category) {
-    let singleAppApi = document.getElementById(appId).value;
-    localStorage.setItem('singleAppApi', singleAppApi);
-    localStorage.setItem('app-category', category);
-}
-
-
 // Get more btn set
 document.querySelectorAll('.more-app-btn').forEach((element) => {
     let myUrl = element.getAttribute('category');

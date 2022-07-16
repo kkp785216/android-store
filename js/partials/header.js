@@ -4,7 +4,7 @@ const header = `
         <div class="navbar-items container">
             <div id="site-title">
                 <img id="toggle" src="./img/utility/menu-outline.svg" alt="">
-                <a href="index.html" id="title">Allapkstores</a>
+                <a href="index.html" id="title">AndrStore</a>
             </div>
             <div class="menu">
                 <ul>

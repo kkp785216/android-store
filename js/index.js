@@ -34,13 +34,13 @@ navegationOverlay.onclick = function () {
     navegationOverlay.classList.toggle('active');
 }
 
-const fetchPosts = (domElm, postCategory) => {
+const fetchPosts = (domElm, postCategory, id) => {
     let html = '';
     let result = postCategory['app_list']
     result.forEach((element, index) => {
         let catogary = first();
-        html += `<a href="app.html?${element.package_name}" onclick="singleApp('topApp${index}', 'Tranding')" class="app-collum">
-                    <textarea style="display: none;" id="topApp${index}">${JSON.stringify(element)}</textarea>
+        html += `<a href="app.html?${element.package_name}" onclick="singleApp('${id}${index}', 'Tranding')" class="app-collum">
+                    <textarea style="display: none;" id="${id}${index}">${JSON.stringify(element)}</textarea>
                     <div class="app-icon">
                         <img src="${element.icon}" alt="">
                     </div>
@@ -73,9 +73,9 @@ const fetchPosts = (domElm, postCategory) => {
 }
 
 // set apps and games their sections
-fetchPosts(document.querySelector('.top-app-section .app-row'), overall);
-fetchPosts(document.querySelector('.latest-game-section .app-row'), game);
-fetchPosts(document.querySelector('.latest-app-section .app-row'), application);
+fetchPosts(document.querySelector('.top-app-section .app-row'), overall, 'topApp');
+fetchPosts(document.querySelector('.latest-game-section .app-row'), game, 'game');
+fetchPosts(document.querySelector('.latest-app-section .app-row'), application, 'latestApp');
 
 // Get more btn set
 document.querySelectorAll('.more-app-btn').forEach((element) => {
