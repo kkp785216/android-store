@@ -1,11 +1,13 @@
-import header from './partials/header.js'
-document.querySelector('header').innerHTML = header;
-
-import footer from './partials/footer.js'
-document.querySelector('footer').innerHTML = footer;
-
-import sidebar from './partials/sidebar.js'
-document.querySelector('#side-bar').innerHTML = sidebar;
+// Fetch and set header, footer and sidebar into the dom
+const partials = (url, dom) => {
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', url, false);
+    xhr.send();
+    dom.innerHTML = xhr.responseText;
+}
+partials('partials/header.txt', document.querySelector('header'));
+partials('partials/sidebar.txt', document.querySelector('#side-bar'));
+partials('partials/footer.txt', document.querySelector('footer'));
 
 // PC and Mobile Menu Same to Same
 let menu = document.querySelector('.menu');
@@ -38,61 +40,49 @@ let result;
 
 
 if (localStorage.getItem('main-category') !== null) {
-    async function topTrandingFunc() {
-        let params = {
-            "list_name": "movers_shakers",
-            "cat_key": "OVERALL",
-            "country": "IN",
-            "limit": "10",
-            // "access_token": key,
-        }
-        // url = `https://data.42matters.com/api/v3.0/android/apps/top_google_charts.json?list_name=${params["list_name"]}&cat_key=${params["cat_key"]}&country=${params["country"]}&limit=${params["limit"]}&access_token=${params["access_token"]}`;
-        let url = `catApi/${localStorage.getItem('main-category')}.txt`;
+    let url = `catApi/${localStorage.getItem('main-category')}.txt`;
 
-        const result = await fetch(url);
-        if (result.status === 200) {
-            return result.json();
+    // const result = await fetch(url);
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', url, false);
+    xhr.send();
+    let data = JSON.parse(xhr.responseText);
+    result = data['app_list'];
+    displayPosts();
+
+    // Page Navigation
+    function goToPage(index) {
+        displayPosts();
+        document.getElementById('number').innerHTML = `${index} of ${totalPage}`;
+        if (index < totalPage) {
+            document.getElementById('next').disabled = false;
+        }
+        else {
+            document.getElementById('next').disabled = true;
+        }
+        if (index > 1) {
+            document.getElementById('previous').disabled = false;
+        }
+        else {
+            document.getElementById('previous').disabled = true;
         }
     }
-    let topTrandingResult = topTrandingFunc();
-    topTrandingResult.then((data) => {
-        result = data['app_list'];
-        displayPosts();
+    goToPage(pageIndex);
 
-        // Page Navigation
-        function goToPage(index) {
-            displayPosts();
-            document.getElementById('number').innerHTML = `${index} of ${totalPage}`;
-            if (index < totalPage) {
-                document.getElementById('next').disabled = false;
-            }
-            else {
-                document.getElementById('next').disabled = true;
-            }
-            if (index > 1) {
-                document.getElementById('previous').disabled = false;
-            }
-            else {
-                document.getElementById('previous').disabled = true;
-            }
-        }
-        goToPage(pageIndex);
-
-        Array.from(document.getElementsByClassName('pageBtn')).forEach((element) => {
-            element.addEventListener('click', (event) => {
-                if (event.target.textContent === 'Next') {
-                    if (pageIndex < totalPage) {
-                        pageIndex++;
-                        goToPage(pageIndex);
-                    }
+    Array.from(document.getElementsByClassName('pageBtn')).forEach((element) => {
+        element.addEventListener('click', (event) => {
+            if (event.target.textContent === 'Next') {
+                if (pageIndex < totalPage) {
+                    pageIndex++;
+                    goToPage(pageIndex);
                 }
-                else if (event.target.textContent === 'Previous') {
-                    if (pageIndex > 1) {
-                        pageIndex--;
-                        goToPage(pageIndex);
-                    }
+            }
+            else if (event.target.textContent === 'Previous') {
+                if (pageIndex > 1) {
+                    pageIndex--;
+                    goToPage(pageIndex);
                 }
-            });
+            }
         });
     });
 }
@@ -183,7 +173,6 @@ function displayPosts() {
     }
 
     wantedResult.forEach((element, index) => {
-        // wantedResult.forEach((element, index) => {
         let catogary = first();
         html += `<a href="app.html?${element.package_name}" onclick="singleApp('topApp${index}', 'Tranding')" class="app-collum">
                 <textarea style="display: none;" id="topApp${index}">${JSON.stringify(element)}</textarea>
@@ -216,6 +205,12 @@ function displayPosts() {
         }
     });
     editors.innerHTML = html;
+}
+
+function singleApp(appId, category) {
+    let singleAppApi = document.getElementById(appId).value;
+    localStorage.setItem('singleAppApi', singleAppApi);
+    localStorage.setItem('app-category', category);
 }
 
 // Get more btn set

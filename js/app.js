@@ -1,11 +1,13 @@
-import header from './partials/header.js'
-document.querySelector('header').innerHTML = header;
-
-import footer from './partials/footer.js'
-document.querySelector('footer').innerHTML = footer;
-
-import sidebar from './partials/sidebar.js'
-document.querySelector('#side-bar').innerHTML = sidebar;
+// Fetch and set header, footer and sidebar into the dom
+const partials = (url, dom) => {
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', url, false);
+    xhr.send();
+    dom.innerHTML = xhr.responseText;
+}
+partials('partials/header.txt', document.querySelector('header'));
+partials('partials/sidebar.txt', document.querySelector('#side-bar'));
+partials('partials/footer.txt', document.querySelector('footer'));
 
 // PC and Mobile Menu Same to Same
 let menu = document.querySelector('.menu');
@@ -149,7 +151,7 @@ if (localStorage.getItem('singleAppApi') !== null) {
                     case 7: month = 'Aug'; break;
                     case 8: month = 'Sep'; break;
                     case 9: month = 'Oct'; break;
-                    case 10: month = 'Novr'; break;
+                    case 10: month = 'Nov'; break;
                     case 11: month = 'Dec'; break;
                 }
                 let year = time.getFullYear();

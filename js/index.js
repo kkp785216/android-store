@@ -1,15 +1,24 @@
-import header from './partials/header.js'
-document.querySelector('header').innerHTML = header;
+// Fetch and set header, footer and sidebar into the dom
+const partials = (url, dom) => {
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', url, false);
+    xhr.send();
+    dom.innerHTML = xhr.responseText;
+}
+partials('partials/header.txt', document.querySelector('header'));
+partials('partials/sidebar.txt', document.querySelector('#side-bar'));
+partials('partials/footer.txt', document.querySelector('footer'));
 
-import footer from './partials/footer.js'
-document.querySelector('footer').innerHTML = footer;
-
-import sidebar from './partials/sidebar.js'
-document.querySelector('#side-bar').innerHTML = sidebar;
-
-import application from '../api/application.json' assert {type: 'json'}
-import game from '../api/game.json' assert {type: 'json'}
-import overall from '../api/overall.json' assert {type: 'json'}
+// Fetch Posts
+const fetchData = (url) => {
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', url, false);
+    xhr.send();
+    return JSON.parse(xhr.responseText)
+}
+let overall = fetchData('api/overall.txt');
+let game = fetchData('api/game.txt');
+let application = fetchData('api/application.txt');
 
 // PC and Mobile Menu Same to Same
 let menu = document.querySelector('.menu');
@@ -76,6 +85,13 @@ const fetchPosts = (domElm, postCategory, id) => {
 fetchPosts(document.querySelector('.top-app-section .app-row'), overall, 'topApp');
 fetchPosts(document.querySelector('.latest-game-section .app-row'), game, 'game');
 fetchPosts(document.querySelector('.latest-app-section .app-row'), application, 'latestApp');
+
+// Set Current Post on localStorage
+let singleApp = (appId, category) => {
+    let singleAppApi = document.getElementById(appId).value;
+    localStorage.setItem('singleAppApi', singleAppApi);
+    localStorage.setItem('app-category', category);
+}
 
 // Get more btn set
 document.querySelectorAll('.more-app-btn').forEach((element) => {
