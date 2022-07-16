@@ -1,7 +1,7 @@
-import header from './partials/_header.js'
+import header from './partials/header.js'
 document.querySelector('header').innerHTML = header;
 
-import footer from './partials/_footer.js'
+import footer from './partials/footer.js'
 document.querySelector('footer').innerHTML = footer;
 
 // PC and Mobile Menu Same to Same

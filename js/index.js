@@ -1,10 +1,10 @@
-import header from '/js/partials/_header.js'
+import header from './partials/header.js'
 document.querySelector('header').innerHTML = header;
 
-import footer from './partials/_footer.js'
+import footer from './partials/footer.js'
 document.querySelector('footer').innerHTML = footer;
 
-import sidebar from './partials/_sidebar.js'
+import sidebar from './partials/sidebar.js'
 document.querySelector('#side-bar').innerHTML = sidebar;
 
 import application from '../api/application.json' assert {type: 'json'}
