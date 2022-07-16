@@ -1,0 +1,33 @@
+const header = `
+    <!-- Navigation Bar -->
+    <nav id="navbar">
+        <div class="navbar-items container">
+            <div id="site-title">
+                <img id="toggle" src="./img/utility/menu-outline.svg" alt="">
+                <a href="index.html" id="title">Allapkstores</a>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li class="menu-items active"><a href="index.html">Home</a></li>
+                    <li class="menu-items"><a href="#" class="more-app-btn" category="APPLICATION">Apps</a></li>
+                    <li class="menu-items"><a href="#" class="more-app-btn" category="GAME">Games</a></li>
+                    <li class="menu-items"><a href="#">News</a></li>
+                </ul>
+            </div>
+            <div id="search">
+                <input type="text" placeholder="Search">
+                <img src="img/utility/search.png" alt="">
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-header">
+        <div class="toggle-box">
+            <img id="toggle1" src="./img/utility/close-outline.svg" alt="">
+        </div>
+        <div class="mobile-menu"></div>
+    </div>
+    <div class="navegation-overlay"></div>`
+    
+export default header

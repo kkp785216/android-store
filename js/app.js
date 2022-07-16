@@ -1,3 +1,12 @@
+import header from './partials/_header.js'
+document.querySelector('header').innerHTML = header;
+
+import footer from './partials/_footer.js'
+document.querySelector('footer').innerHTML = footer;
+
+import sidebar from './partials/_sidebar.js'
+document.querySelector('#side-bar').innerHTML = sidebar;
+
 // PC and Mobile Menu Same to Same
 let menu = document.querySelector('.menu');
 let mobileMmenu = document.querySelector('.mobile-menu');
@@ -23,7 +32,7 @@ navegationOverlay.onclick = function () {
 
 
 if (localStorage.getItem('singleAppApi') !== null) {
-    api = JSON.parse(localStorage.getItem('singleAppApi'));
+    let api = JSON.parse(localStorage.getItem('singleAppApi'));
 
     // Utility
     let size = parseInt(api.size / 1048576) <= 1024 ? parseInt(api.size / 1048576) + 'M' : (api.size / 1073741824).toFixed(1) + 'G'
@@ -126,7 +135,7 @@ if (localStorage.getItem('singleAppApi') !== null) {
         }
         else if (key === 'market_update') {
             function showTime() {
-                time = new Date(api[key]);
+                let time = new Date(api[key]);
                 let date = time.getDate();
                 let month;
                 switch (time.getMonth()) {

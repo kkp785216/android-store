@@ -1,3 +1,12 @@
+import header from './partials/_header.js'
+document.querySelector('header').innerHTML = header;
+
+import footer from './partials/_footer.js'
+document.querySelector('footer').innerHTML = footer;
+
+import sidebar from './partials/_sidebar.js'
+document.querySelector('#side-bar').innerHTML = sidebar;
+
 // PC and Mobile Menu Same to Same
 let menu = document.querySelector('.menu');
 let mobileMmenu = document.querySelector('.mobile-menu');
@@ -30,7 +39,7 @@ let result;
 
 if (localStorage.getItem('main-category') !== null) {
     async function topTrandingFunc() {
-        params = {
+        let params = {
             "list_name": "movers_shakers",
             "cat_key": "OVERALL",
             "country": "IN",
@@ -38,7 +47,7 @@ if (localStorage.getItem('main-category') !== null) {
             // "access_token": key,
         }
         // url = `https://data.42matters.com/api/v3.0/android/apps/top_google_charts.json?list_name=${params["list_name"]}&cat_key=${params["cat_key"]}&country=${params["country"]}&limit=${params["limit"]}&access_token=${params["access_token"]}`;
-        url = `catApi/${localStorage.getItem('main-category')}.txt`;
+        let url = `catApi/${localStorage.getItem('main-category')}.txt`;
 
         const result = await fetch(url);
         if (result.status === 200) {
@@ -157,17 +166,17 @@ function displayPosts() {
     totalPage = ~~(result.length / perPagePost) + 1;
     if (pageIndex <= totalPage && pageIndex > 0) {
         if (pageIndex === 1) {
-            for (i = 0; i < perPagePost; i++) {
+            for (let i = 0; i < perPagePost; i++) {
                 wantedResult.push(result[i]);
             }
         }
         else if (pageIndex === totalPage) {
-            for (i = (pageIndex - 1) * perPagePost; i < ((pageIndex - 1) * perPagePost) + result.length % perPagePost; i++) {
+            for (let i = (pageIndex - 1) * perPagePost; i < ((pageIndex - 1) * perPagePost) + result.length % perPagePost; i++) {
                 wantedResult.push(result[i]);
             }
         }
         else {
-            for (i = (pageIndex - 1) * perPagePost; i < (perPagePost * pageIndex); i++) {
+            for (let i = (pageIndex - 1) * perPagePost; i < (perPagePost * pageIndex); i++) {
                 wantedResult.push(result[i]);
             }
         }

@@ -1,3 +1,9 @@
+import header from './partials/_header.js'
+document.querySelector('header').innerHTML = header;
+
+import footer from './partials/_footer.js'
+document.querySelector('footer').innerHTML = footer;
+
 // PC and Mobile Menu Same to Same
 let menu = document.querySelector('.menu');
 let mobileMmenu = document.querySelector('.mobile-menu');
@@ -23,7 +29,7 @@ navegationOverlay.onclick = function () {
 
 
 if (localStorage.getItem('singleAppApi') !== null) {
-    api = JSON.parse(localStorage.getItem('singleAppApi'));
+    let api = JSON.parse(localStorage.getItem('singleAppApi'));
 
     // Breadcrumb
     let breadcrumb = document.createElement('div');
